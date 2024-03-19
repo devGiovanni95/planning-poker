@@ -1,0 +1,16 @@
+{
+  "name": "planningpoker",
+  "version": "1.0.0",
+  "description": "Api para atribuição de pontuação para sprints",
+  "main": "index.ts",
+  "scripts": {
+    "dev": " npx json-server --watch database/db.json",
+    "build": " npx json-server --watch database/db.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.4.2"
+  }
+}
