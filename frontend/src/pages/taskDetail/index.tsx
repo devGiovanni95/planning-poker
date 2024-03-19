@@ -7,6 +7,7 @@ import ModalResult from '../../components/modalResult'
 import React from 'react'
 import { ITask, IVotes } from './../../interface/index';
 import { api } from '../../axios'
+import TaskCard from '../../components/Card'
 
 
 export default function TaskDetail(){
@@ -14,8 +15,8 @@ export default function TaskDetail(){
     const navigate = useNavigate()
     const {userName, setUserName}  = useContext(UserContext)
     const {taskName, setTaskName} = useContext(UserContext)
-    const [tasks, setTasks] = useState<ITask[]>([])
-    const [votes, setVotes] = useState<IVotes[]>([])
+    const [tasks, setTasks] = useState<ITask | null>(null)
+    const [votes, setVotes] = useState<IVotes[]>()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { isOpen:iOpen, onOpen:oOpen, onClose: oClose } = useDisclosure()
     const {id} = useParams();
@@ -220,19 +221,12 @@ export default function TaskDetail(){
                 </Card>
 
             <Flex direction="row" align="center" justify="center" flexWrap={'wrap'}>
-                    {tasks.map(task => (
-                        <Card key={task.id} border={'1px'} borderRadius={10} width={'35vw'} marginRight={4} mb={3}>
-                            <CardBody width={'100%'}>
-                                <Text>Tarefa: {task.title}</Text>
-                                {task.result ? (
-                                    <Text>Pontuação: {task.result}</Text>
-                                ) : (
-                                    <Text>Pontuação: 0</Text>
-                                )}
-                            </CardBody>
-                        </Card>
-                    ))}
-
+                <TaskCard
+                    key={tasks?.id}
+                    title={tasks?.title}
+                    result={tasks?.result}
+                />
+                   
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
